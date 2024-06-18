@@ -131,4 +131,4 @@ function changeTurnMark() {
     return turnMark;
 }
 
-DOMgameBoard.addEventListener(`click`, writeToGameBoard(e.target, changeTurnMark()));
+DOMgameBoard.addEventListener(`click`, (e) => {writeToGameBoard(e.target, changeTurnMark())});
