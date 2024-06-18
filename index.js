@@ -16,7 +16,11 @@ function convertInputToArray(input){
 
 function writeToGameBoard() {
     let input = convertInputToArray(promptUser());
-    gameBoard[input[0]][input[1]] = input[2];
+    if(gameBoard[input[0]][input[1]] == input[2]) {
+        return false;
+    } else {
+        gameBoard[input[0]][input[1]] = input[2];
+    }
 };
 
 function checkRows(){
