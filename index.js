@@ -1,25 +1,51 @@
+const DOMgameBoard = document.querySelector(`.container`);
+
+let turnMark = `O`;
+
 let gameBoard = [[0,0,0],
                  [0,0,0],
                  [0,0,0]];
 
-function promptUser(){
-    let input = prompt(`enter a row number, and a column number.`);
-    return input;
+function getTargetCoords(target){
+    switch(target.id){
+        case `1`:
+            return [0,0];
+        break;
+        case `2`:
+            return [0,1];
+        break;
+        case `3`:
+            return [0,2];
+        break;
+        case `4`:
+            return [1,0];
+        break;
+        case `5`:
+            return [1,1];
+        break;
+        case `6`:
+            return [1,2];
+        break;
+        case `7`:
+            return [2,0];
+        break;
+        case `8`:
+            return [2,1];
+        break;
+        case `9`:
+            return [2,2];
+        break;
+        default:
+            return false;
+    }
 }
 
-function convertInputToArray(input){
-    input = input.split(``);
-    input[0] = +input[0];
-    input[1] = +input[1];
-    return input;
-}
-
-function writeToGameBoard() {
-    let input = convertInputToArray(promptUser());
-    if(gameBoard[input[0]][input[1]] == input[2]) {
+function writeToGameBoard(target, mark) {
+    let input = getTargetCoords(target);
+    if(gameBoard[input[0]][input[1]] == `X` || `O`) {
         return false;
     } else {
-        gameBoard[input[0]][input[1]] = input[2];
+        gameBoard[input[0]][input[1]] = mark;
     }
 };
 
@@ -92,6 +118,18 @@ function checkWin() {
         return false;
     }
 }
+
+function changeTurnMark() {
+    if(turnMark == `O`) {
+        turnMark = `X`;
+    } else {
+        turnMark = `O`;
+    }
+    return turnMark;
+}
+
+DOMgameBoard.addEventListener(`click`, writeToGameBoard(e.target, changeTurnMark()));
+
 
 while(!checkRows() && !checkColumns() && !checkDiagonals()) {
     writeToGameBoard();
