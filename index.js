@@ -46,6 +46,9 @@ function writeToGameBoard(target, mark) {
         return false;
     } else {
         gameBoard[input[0]][input[1]] = mark;
+        console.log(gameBoard);
+        console.log(checkWin());
+        return true;
     }
 };
 
@@ -129,9 +132,3 @@ function changeTurnMark() {
 }
 
 DOMgameBoard.addEventListener(`click`, writeToGameBoard(e.target, changeTurnMark()));
-
-
-while(!checkRows() && !checkColumns() && !checkDiagonals()) {
-    writeToGameBoard();
-    console.log(gameBoard)
-}
