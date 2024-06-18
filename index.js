@@ -7,42 +7,45 @@ let gameBoard = [[0,0,0],
                  [0,0,0]];
 
 function getTargetCoords(target){
+    let targetCoords = [];
     switch(target.id){
         case `1`:
-            return [0,0];
+            targetCoords = [0,0];
         break;
         case `2`:
-            return [0,1];
+            targetCoords = [0,1];
         break;
         case `3`:
-            return [0,2];
+            targetCoords = [0,2];
         break;
         case `4`:
-            return [1,0];
+            targetCoords = [1,0];
         break;
         case `5`:
-            return [1,1];
+            targetCoords = [1,1];
         break;
         case `6`:
-            return [1,2];
+            targetCoords = [1,2];
         break;
         case `7`:
-            return [2,0];
+            targetCoords = [2,0];
         break;
         case `8`:
-            return [2,1];
+            targetCoords = [2,1];
         break;
         case `9`:
-            return [2,2];
+            targetCoords = [2,2];
         break;
         default:
             return false;
     }
+    return targetCoords;
 }
 
 function writeToGameBoard(target, mark) {
     let input = getTargetCoords(target);
-    if(gameBoard[input[0]][input[1]] == `X` || `O`) {
+    if((gameBoard[input[0]][input[1]] == `X` || `O`) || input == false) {
+        console.log(`false`)
         return false;
     } else {
         gameBoard[input[0]][input[1]] = mark;
@@ -132,3 +135,4 @@ function changeTurnMark() {
 }
 
 DOMgameBoard.addEventListener(`click`, (e) => {writeToGameBoard(e.target, changeTurnMark())});
+// DOMgameBoard.addEventListener(`click`, (e) => {console.log(e.target)});
