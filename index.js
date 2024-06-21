@@ -2,6 +2,8 @@ const DOMgameBoard = document.querySelector(`.container`);
 
 let turnMark = `O`;
 
+let turnCounter = 0;
+
 let gameBoard = [[0,0,0],
                  [0,0,0],
                  [0,0,0]];
@@ -44,15 +46,30 @@ function getTargetCoords(target){
 
 function writeToGameBoard(target, mark) {
     let input = getTargetCoords(target);
-    if((gameBoard[input[0]][input[1]] == `X` || `O`) || input == false) {
-        console.log(`false`)
+    if(gameBoard[input[0]][input[1]] === `X` || gameBoard[input[0]][input[1]] === `O` || input == false) {
+        changeTurnMark();
         return false;
     } else {
         gameBoard[input[0]][input[1]] = mark;
-        console.log(gameBoard);
-        console.log(checkWin());
+        turnCounter++;
+        if(checkWin()) {
+            turnCounter = 0;
+            console.log(`${checkWin()} WINS!`);
+            gameBoard = [[0,0,0],
+                         [0,0,0],
+                         [0,0,0]];
+        }
+        if(turnCounter >= 9) {
+            turnCounter = 0;
+            console.log(`TIE!`);
+            gameBoard = [[0,0,0],
+                         [0,0,0],
+                         [0,0,0]];
+        }
+        console.log(gameBoard)
         return true;
     }
+    
 };
 
 function checkRows(){
