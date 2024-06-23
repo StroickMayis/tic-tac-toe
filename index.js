@@ -1,5 +1,6 @@
 const DOMgameBoard = document.querySelector(`.container`);
 const DOMgameBoardAll = document.querySelector(`.container`);
+const newGameButton = document.querySelector(`.newGame`);
 
 let turnMark = `O`;
 
@@ -47,6 +48,9 @@ function getTargetCoords(target){
 
 function writeToGameBoard(target, mark) {
     let input = getTargetCoords(target);
+    if(input === false) {
+        return false;
+    }
     if(gameBoard[input[0]][input[1]] === `X` || gameBoard[input[0]][input[1]] === `O` || input == false) {
         changeTurnMark();
         return false;
@@ -67,7 +71,6 @@ function writeToGameBoard(target, mark) {
                          [,,],
                          [,,]];
         }
-        console.log(gameBoard)
         return true;
     }
     
@@ -199,10 +202,8 @@ function selectGameBoardByNum(num) {
 function updateDOM() {
     const cells = selectDOMcells();
     for( x = 1; x < 10; x++ ) {
-        console.log(selectGameBoardByNum(x));
         cells[x - 1].textContent = selectGameBoardByNum(x);
     }
 };     
 
 DOMgameBoard.addEventListener(`click`, (e) => {writeToGameBoard(e.target, changeTurnMark()); updateDOM()});
-// DOMgameBoard.addEventListener(`click`, (e) => {console.log(e.target)});
