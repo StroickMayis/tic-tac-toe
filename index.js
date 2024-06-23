@@ -204,6 +204,15 @@ function updateDOM() {
     for( x = 1; x < 10; x++ ) {
         cells[x - 1].textContent = selectGameBoardByNum(x);
     }
-};     
+}; 
+
+function createNewGame() {
+    turnCounter = 0;
+    gameBoard = [[,,],
+                 [,,],
+                 [,,]];
+}
 
 DOMgameBoard.addEventListener(`click`, (e) => {writeToGameBoard(e.target, changeTurnMark()); updateDOM()});
+
+newGameButton.addEventListener(`click`, () => {createNewGame(); updateDOM()});
