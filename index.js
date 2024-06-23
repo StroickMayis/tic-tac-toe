@@ -5,9 +5,9 @@ let turnMark = `O`;
 
 let turnCounter = 0;
 
-let gameBoard = [[0,0,0],
-                 [0,0,0],
-                 [0,0,0]];
+let gameBoard = [[,,],
+                 [,,],
+                 [,,]];
 
 function getTargetCoords(target){
     let targetCoords = [];
@@ -56,16 +56,16 @@ function writeToGameBoard(target, mark) {
         if(checkWin()) {
             turnCounter = 0;
             console.log(`${checkWin()} WINS!`);
-            gameBoard = [[0,0,0],
-                         [0,0,0],
-                         [0,0,0]];
+            gameBoard = [[,,],
+                         [,,],
+                         [,,]];
         }
         if(turnCounter >= 9) {
             turnCounter = 0;
             console.log(`TIE!`);
-            gameBoard = [[0,0,0],
-                         [0,0,0],
-                         [0,0,0]];
+            gameBoard = [[,,],
+                         [,,],
+                         [,,]];
         }
         console.log(gameBoard)
         return true;
