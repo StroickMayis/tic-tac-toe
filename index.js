@@ -1,4 +1,5 @@
 const DOMgameBoard = document.querySelector(`.container`);
+const DOMgameBoardAll = document.querySelector(`.container`);
 
 let turnMark = `O`;
 
@@ -151,5 +152,57 @@ function changeTurnMark() {
     return turnMark;
 }
 
-DOMgameBoard.addEventListener(`click`, (e) => {writeToGameBoard(e.target, changeTurnMark())});
+function selectDOMcells() {
+    const cell = [];
+    for( x = 1; x < 10; x++ ) {
+        cell.push(DOMgameBoardAll.querySelector(`.n${x}`))
+    }
+    return cell; 
+}
+
+function selectGameBoardByNum(num) {
+    let value;
+    switch(num){
+        case 1:
+            value = gameBoard[0][0];
+        break;
+        case 2:
+            value = gameBoard[0][1];
+        break;
+        case 3:
+            value = gameBoard[0][2];
+        break;
+        case 4:
+            value = gameBoard[1][0];
+        break;
+        case 5:
+            value = gameBoard[1][1];
+        break;
+        case 6:
+            value = gameBoard[1][2];
+        break;
+        case 7:
+            value = gameBoard[2][0];
+        break;
+        case 8:
+            value = gameBoard[2][1];
+        break;
+        case 9:
+            value = gameBoard[2][2];
+        break;
+        default:
+            return false;
+    }
+    return value;
+}
+
+function updateDOM() {
+    const cells = selectDOMcells();
+    for( x = 1; x < 10; x++ ) {
+        console.log(selectGameBoardByNum(x));
+        cells[x - 1].textContent = selectGameBoardByNum(x);
+    }
+};     
+
+DOMgameBoard.addEventListener(`click`, (e) => {writeToGameBoard(e.target, changeTurnMark()); updateDOM()});
 // DOMgameBoard.addEventListener(`click`, (e) => {console.log(e.target)});
