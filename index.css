@@ -33,3 +33,12 @@ body {
     flex: 0 1 auto;
     width: 300px;
 }
+
+.gameStatusDisplay {
+    color:white;
+    background-color: black;
+    text-align: center;
+    font-size: 30px;
+    flex: 0 1 auto;
+    width: 300px;
+}

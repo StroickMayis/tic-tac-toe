@@ -1,6 +1,7 @@
 const DOMgameBoard = document.querySelector(`.container`);
 const DOMgameBoardAll = document.querySelector(`.container`);
 const newGameButton = document.querySelector(`.newGame`);
+const gameStatusDisplay = document.querySelector(`.gameStatusDisplay`);
 
 let turnMark = `O`;
 
@@ -9,6 +10,14 @@ let turnCounter = 0;
 let gameBoard = [[,,],
                  [,,],
                  [,,]];
+
+function getTurnMarkOpposite() {
+    if(turnMark === `O`) {
+        return `X`;
+    } else {
+        return `O`;
+    }
+}
 
 function getTargetCoords(target){
     let targetCoords = [];
@@ -57,16 +66,17 @@ function writeToGameBoard(target, mark) {
     } else {
         gameBoard[input[0]][input[1]] = mark;
         turnCounter++;
+        gameStatusDisplay.textContent = `Turn: ${getTurnMarkOpposite()}`;
         if(checkWin()) {
             turnCounter = 0;
-            console.log(`${checkWin()} WINS!`);
+            gameStatusDisplay.textContent = `${checkWin()} WINS! Turn: ${getTurnMarkOpposite()}`;
             gameBoard = [[,,],
                          [,,],
                          [,,]];
         }
         if(turnCounter >= 9) {
             turnCounter = 0;
-            console.log(`TIE!`);
+            gameStatusDisplay.textContent = `TIE! Turn: ${getTurnMarkOpposite()}`;
             gameBoard = [[,,],
                          [,,],
                          [,,]];
@@ -211,6 +221,7 @@ function createNewGame() {
     gameBoard = [[,,],
                  [,,],
                  [,,]];
+    gameStatusDisplay.textContent = `-`;
 }
 
 DOMgameBoard.addEventListener(`click`, (e) => {writeToGameBoard(e.target, changeTurnMark()); updateDOM()});
