@@ -145,11 +145,11 @@ function checkDiagonals(){
 }
 
 function checkWin() {
-    if(checkRows() != false) {
+    if(checkRows()) {
         return checkRows();
-    } else if(checkColumns() != false) {
+    } else if(checkColumns()) {
         return checkColumns();
-    } else if(checkDiagonals() != false) {
+    } else if(checkDiagonals()) {
         return checkDiagonals();
     } else {
         return false;
